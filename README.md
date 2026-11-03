@@ -71,8 +71,6 @@ O Cowrie grava cada evento em JSON, o agente Wazuh envia esse arquivo ao SIEM e 
 
 Roda como usuário sem privilégio, escuta na porta 2222 e imita um Debian com OpenSSH 9.2. Aceita qualquer senha, exceto `root` com senhas óbvias, o que permite observar tanto tentativas que falham quanto um atacante "dentro" do sistema falso.
 
-![Cowrie em execução](docs/03-cowrie-status.png)
-
 ### 2. Agente Wazuh
 
 No honeypot, o agente lê o log JSON do Cowrie com este bloco no `/var/ossec/etc/ossec.conf`:
@@ -123,8 +121,6 @@ Exemplo de regra (brute force por correlação):
 
 Antes de ativar, validei cada regra no `wazuh-logtest` com eventos simulados. O arquivo completo está em [`rules/local_rules.xml`](rules/local_rules.xml).
 
-![wazuh-logtest disparando a regra](docs/05-logtest.png)
-
 ## Ataques simulados e detecções
 
 Todos os 9 ataques, feitos da Kali contra o honeypot, geraram o alerta esperado no Wazuh.
@@ -156,8 +152,6 @@ A partir de um único alerta de login bem-sucedido, reconstruí tudo o que o ata
 1. Abri o alerta 100110 no Threat Hunting e copiei o `data.session` e o `data.src_ip`.
 2. Filtrei por `data.session:"<ID da sessão>"` e ordenei por horário.
 3. Li os eventos em ordem e classifiquei cada um numa fase do ataque.
-
-![Sessão reconstruída](docs/08-sessao.png)
 
 | Evento | Detalhe | Fase |
 | --- | --- | --- |
